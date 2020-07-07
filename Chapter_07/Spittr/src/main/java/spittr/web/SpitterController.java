@@ -48,7 +48,7 @@ public class SpitterController {
 //    spitterRepository.save(spitter);
 //    redirectAttributes.addAttribute("username", spitter.getUsername());
 //    redirectAttributes.addFlashAttribute(spitter);
-//    return "redirect:/spitter/" + spitter.getUsername();
+//    return "redirect:/spitter/{username}";   //通过占位符替换
 //  }
   
   @RequestMapping(value="/register", method=POST)
@@ -62,7 +62,7 @@ public class SpitterController {
     Spitter spitter = spitterForm.toSpitter();
     spitterRepository.save(spitter);
     MultipartFile profilePicture = spitterForm.getProfilePicture();
-    profilePicture.transferTo(new File("/tmp/spittr/" + spitter.getUsername() + ".jpg"));
+    profilePicture.transferTo(new File("D://" + spitter.getUsername() + ".jpg"));
     return "redirect:/spitter/" + spitter.getUsername();
   }
   

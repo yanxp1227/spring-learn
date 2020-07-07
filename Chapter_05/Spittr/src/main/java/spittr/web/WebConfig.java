@@ -11,10 +11,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
-@EnableWebMvc
+@EnableWebMvc   //开启web
 @ComponentScan("spittr.web")
 public class WebConfig extends WebMvcConfigurerAdapter {
 
+  // 配置视图解析器
   @Bean
   public ViewResolver viewResolver() {
     InternalResourceViewResolver resolver = new InternalResourceViewResolver();
@@ -22,7 +23,8 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     resolver.setSuffix(".jsp");
     return resolver;
   }
-  
+
+  // 配置静态资源处理
   @Override
   public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
     configurer.enable();

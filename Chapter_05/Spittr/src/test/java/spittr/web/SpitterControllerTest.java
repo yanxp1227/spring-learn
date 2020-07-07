@@ -51,11 +51,11 @@ public class SpitterControllerTest {
     MockMvc mockMvc = standaloneSetup(controller).build();
     
     mockMvc.perform(post("/spitter/register"))
-        .andExpect(status().isOk())
-        .andExpect(view().name("registerForm"))
-        .andExpect(model().errorCount(5))
+        .andExpect(status().isOk())   // 断言接口返回状态码success
+        .andExpect(view().name("registerForm"))  //断言视图名
+        .andExpect(model().errorCount(5))    //断言有5个错误
         .andExpect(model().attributeHasFieldErrors(
-            "spitter", "firstName", "lastName", "username", "password", "email"));
+            "spitter", "firstName", "lastName", "username", "password", "email"));  //断言属性错误
   }
 
 }

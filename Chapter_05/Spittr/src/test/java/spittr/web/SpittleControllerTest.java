@@ -41,20 +41,22 @@ public class SpittleControllerTest {
   @Test
   public void shouldShowPagedSpittles() throws Exception {
     List<Spittle> expectedSpittles = createSpittleList(50);
+    //Mock Repository
     SpittleRepository mockRepository = mock(SpittleRepository.class);
     when(mockRepository.findSpittles(238900, 50))
         .thenReturn(expectedSpittles);
     
     SpittleController controller = new SpittleController(mockRepository);
+    //Mock SpringMvc
     MockMvc mockMvc = standaloneSetup(controller)
         .setSingleView(new InternalResourceView("/WEB-INF/views/spittles.jsp"))
         .build();
 
-    mockMvc.perform(get("/spittles?max=238900&count=50"))
-      .andExpect(view().name("spittles"))
-      .andExpect(model().attributeExists("spittleList"))
+    mockMvc.perform(get("/spittles?max=238900&count=50"))  //GET请求URL
+      .andExpect(view().name("spittles"))   //断言期望视图
+      .andExpect(model().attributeExists("spittleList"))   //断言存在指定的属性
       .andExpect(model().attribute("spittleList", 
-                 hasItems(expectedSpittles.toArray())));
+                 hasItems(expectedSpittles.toArray())));   //断言期望的值
   }
   
   @Test
@@ -79,12 +81,14 @@ public class SpittleControllerTest {
     MockMvc mockMvc = standaloneSetup(controller).build();
 
     mockMvc.perform(post("/spittles")
+            //设置请求的参数
            .param("message", "Hello World") // this works, but isn't really testing what really happens
            .param("longitude", "-81.5811668")
            .param("latitude", "28.4159649")
            )
-           .andExpect(redirectedUrl("/spittles"));
-    
+           .andExpect(redirectedUrl("/spittles"));   //断言重定向路径
+
+    // 校验mockRepository至少一次调用save() 方法
     verify(mockRepository, atLeastOnce()).save(new Spittle(null, "Hello World", new Date(), -81.5811668, 28.4159649));
   }
   

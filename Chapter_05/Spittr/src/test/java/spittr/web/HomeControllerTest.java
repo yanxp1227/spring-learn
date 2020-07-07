@@ -13,9 +13,9 @@ public class HomeControllerTest {
   @Test
   public void testHomePage() throws Exception {
     HomeController controller = new HomeController();
-    MockMvc mockMvc = standaloneSetup(controller).build();
-    mockMvc.perform(get("/"))
-           .andExpect(view().name("home"));
+    MockMvc mockMvc = standaloneSetup(controller).build();   //搭建MockMvc
+    mockMvc.perform(get("/"))   //GET 请求路径
+           .andExpect(view().name("home"));   // 期望返回指定 视图名“home”
   }
 
 }
