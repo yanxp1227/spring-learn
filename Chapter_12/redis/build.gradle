@@ -6,6 +6,8 @@ repositories {
 }
 
 dependencies {
+    mavenLocal()
+    maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
     compile("org.springframework:spring-context:4.0.6.RELEASE")
     compile("org.springframework.data:spring-data-redis:1.3.2.RELEASE")
     compile("com.fasterxml.jackson.core:jackson-databind:2.4.1.3")
